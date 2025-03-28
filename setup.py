@@ -41,7 +41,11 @@ class CMakeBuild(build_ext):
     def build_extension(self, ext):
         extdir = os.path.abspath(os.path.dirname(self.get_ext_fullpath(ext.name)))
         extdir = os.path.join(extdir, "point_cloud_utils")
-        cmake_args = ['-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=' + extdir, '-DPYTHON_EXECUTABLE=' + sys.executable]
+        cmake_args = [
+            '-DCMAKE_POLICY_VERSION_MINIMUM=3.10', 
+            '-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=' + extdir, 
+            '-DPYTHON_EXECUTABLE=' + sys.executable,
+        ]
         cmake_args.extend(ext.cmake_args)
 
         cfg = 'Debug' if self.debug or os.environ.get("PCU_DEBUG") else 'Release'
