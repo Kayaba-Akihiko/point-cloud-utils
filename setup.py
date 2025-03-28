@@ -80,7 +80,7 @@ def main():
     with open("README.md", "r") as fh:
         long_description = fh.read()
 
-    cmake_args = []
+    cmake_args = ['-DCMAKE_POLICY_VERSION_MINIMUM=3.10']
     exclude_arch = False
     if 'USE_MKL' in os.environ or '--use-mkl' in sys.argv:
         cmake_args.append('-DEIGEN_WITH_MKL=ON')
